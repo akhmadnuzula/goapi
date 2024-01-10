@@ -7,6 +7,7 @@ import (
 	"log"
 	"goapi/database"
 	"goapi/handlers"
+	"goapi/middlewares"
 )
 
 func main() {
@@ -17,7 +18,7 @@ func main() {
 	}
 
 	router := gin.Default()
-
+	router.Use(middlewares.AuthMiddleware())
 	// koneksi ke db
 	database.InitDB()
 

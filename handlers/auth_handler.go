@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"goapi/models"
@@ -26,22 +27,28 @@ func Login(c *gin.Context) {
 	}
 
 	if err := c.BindJSON(&loginInfo); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Data login tidak valid" . loginInfo.Username})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Data login tidak valid"})
 		return
 	}
 
-	var user models.User
+	var users []models.User
 	// cari user
-	if err:= database.DB.Where("username = ?", loginInfo.Username).First(&user); err != nil {
-    c.JSON(http.StatusUnauthorized, gin.H{"error": "akun tidak ditemukan"})
-    return
-	}
+	database.DB.Where("username = ?", loginInfo.Username).Find(&users)
 	
-	// cek password
-	if user.Password != loginInfo.Password {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Password anda salah"})
+	if len(users) == 0 {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Akun tidak ditemukan"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	// cek password
+	for _, user := range users {
+		if user.Password == loginInfo.Password {
+			token := os.Getenv("TOKEN")
+			c.JSON(http.StatusOK, gin.H{"token": token})
+			return
+		}
+	}
+
+	// password tidak di temukan
+	c.JSON(http.StatusUnauthorized, gin.H{"error": "Password Anda salah"})
 }
