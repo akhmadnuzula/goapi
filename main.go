@@ -8,8 +8,22 @@ import (
 	"goapi/database"
 	"goapi/handlers"
 	"goapi/middlewares"
+	"github.com/swaggo/gin-swagger"
+	"github.com/swaggo/files"
+	"github.com/goapi/docs"
 )
 
+// "github.com/swaggo/gin-swagger/swaggerFiles"
+
+// @title Your API Title
+// @version 1.0
+// @description Your API Description
+// @termsOfService http://swagger.io/terms/
+// @contact.email Your Contact Email
+// @license.name Your License Name
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host localhost:8080
+// @BasePath /v1
 func main() {
 	// get env
 	err := godotenv.Load()
@@ -20,6 +34,10 @@ func main() {
 	router := gin.Default()
 	// koneksi ke db
 	database.InitDB()
+
+	// Tambahkan rute untuk Swagger Docs
+	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	// auth login
 	router.POST("/login", handlers.Login)

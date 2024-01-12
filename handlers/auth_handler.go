@@ -7,25 +7,25 @@ import (
 	"github.com/gin-gonic/gin"
 	"goapi/models"
 	"goapi/database"
-
-	// "github.com/swaggo/swag/example/celler/httputil"
 )
 
-// get login by id
+type LoginRequest struct{
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+// Login godoc
 // @Summary Get a login by ID
 // @Description Get a login by ID
 // @Tags login
-// @Accept  json
-// @Produce  json
+// @Accept json
+// @Produce json
 // @Param id path int true "Login ID"
+// @Param loginInfo body LoginRequest true "Login Information"
 // @Success 200 {object} gin.H
-// @Router /login/{id} [get]
+// @Router /login/{id} [post]
 func Login(c *gin.Context) {
-	var loginInfo struct{
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}
-
+	var loginInfo LoginRequest
 	if err := c.BindJSON(&loginInfo); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Data login tidak valid"})
 		return
