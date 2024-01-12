@@ -9,11 +9,6 @@ import (
 	"goapi/database"
 )
 
-type LoginRequest struct{
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
 // Login godoc
 // @Summary Get a login by ID
 // @Description Get a login by ID
@@ -21,11 +16,11 @@ type LoginRequest struct{
 // @Accept json
 // @Produce json
 // @Param id path int true "Login ID"
-// @Param loginInfo body LoginRequest true "Login Information"
+// @Param loginInfo body models.Login true "Login Information"
 // @Success 200 {object} gin.H
 // @Router /login/{id} [post]
 func Login(c *gin.Context) {
-	var loginInfo LoginRequest
+	var loginInfo models.Login
 	if err := c.BindJSON(&loginInfo); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Data login tidak valid"})
 		return

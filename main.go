@@ -8,12 +8,12 @@ import (
 	"goapi/database"
 	"goapi/handlers"
 	"goapi/middlewares"
-	"github.com/swaggo/gin-swagger"
-	"github.com/swaggo/files"
-	"github.com/goapi/docs"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"
 )
 
 // "github.com/swaggo/gin-swagger/swaggerFiles"
+	// docs "goapi/docs"
 
 // @title Your API Title
 // @version 1.0
@@ -36,7 +36,7 @@ func main() {
 	database.InitDB()
 
 	// Tambahkan rute untuk Swagger Docs
-	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	url := ginSwagger.URL("/swagger/doc.json")
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	// auth login
