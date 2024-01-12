@@ -18,24 +18,33 @@ func main() {
 	}
 
 	router := gin.Default()
-	router.Use(middlewares.AuthMiddleware())
 	// koneksi ke db
 	database.InitDB()
 
-	// user route
-	router.GET("/users", handlers.GetUsers)
-	router.GET("/users/:id", handlers.GetUser)
-	router.POST("/users", handlers.CreateUser)
-	router.PUT("/users/:id", handlers.UpdateUser)
-	router.DELETE("/users/:id", handlers.DeleteUser)
-	// product route
-	router.GET("/products", handlers.GetProducts)
-	router.GET("/products/:id", handlers.GetProduct)
-	router.POST("/products", handlers.CreateProduct)
-	router.PUT("/products/:id", handlers.UpdateProduct)
-	router.DELETE("/products/:id", handlers.DeleteProduct)
 	// auth login
 	router.POST("/login", handlers.Login)
+	protectedRoutes := router.Group("/")
+	protectedRoutes.Use(middlewares.AuthMiddleware())
+	{
+		// rute user
+		userRoute := protectedRoutes.Group("/users")
+		{
+			userRoute.GET("/", handlers.GetUsers)
+			userRoute.GET("/:id", handlers.GetUser)
+			userRoute.POST("/", handlers.CreateUser)
+			userRoute.PUT("/:id", handlers.UpdateUser)
+			userRoute.DELETE("/:id", handlers.DeleteUser)
+		}
+		// rute product
+		productRoute := protectedRoutes.Group("products")
+		{
+			productRoute.GET("/", handlers.GetProducts)
+			productRoute.GET("/:id", handlers.GetProduct)
+			productRoute.POST("/", handlers.CreateProduct)
+			productRoute.PUT("/:id", handlers.UpdateProduct)
+			productRoute.DELETE("/:id", handlers.DeleteProduct)
+		}
+	}
 	
 	// run server
 	port := ":8080"
