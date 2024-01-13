@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gin-gonic/gin"
-	"goapi/models"
 	"goapi/database"
+	"goapi/models"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Login godoc
@@ -18,7 +19,7 @@ import (
 // @Produce json
 // @Param id path int true "Login ID"
 // @Param loginInfo body models.Login true "Login Information"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /login/{id} [post]
 func Login(c *gin.Context) {
 	var loginInfo models.Login
@@ -30,7 +31,7 @@ func Login(c *gin.Context) {
 	var users []models.User
 	// cari user
 	database.DB.Where("username = ?", loginInfo.Username).Find(&users)
-	
+
 	if len(users) == 0 {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Akun tidak ditemukan"})
 		return

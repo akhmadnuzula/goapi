@@ -1,9 +1,6 @@
 basePath: /v1
 definitions:
-  gin.H:
-    additionalProperties: {}
-    type: object
-  handlers.LoginRequest:
+  models.Login:
     properties:
       password:
         type: string
@@ -62,14 +59,15 @@ paths:
         name: loginInfo
         required: true
         schema:
-          $ref: '#/definitions/handlers.LoginRequest'
+          $ref: '#/definitions/models.Login'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Get a login by ID
       tags:
       - login
@@ -84,7 +82,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Get list of product
       tags:
       - product
@@ -105,7 +104,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Create a new product
       tags:
       - products
@@ -126,7 +126,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Delete a product by ID
       tags:
       - products
@@ -146,7 +147,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Get a product by ID
       tags:
       - products
@@ -172,7 +174,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Update a product by ID
       tags:
       - product
@@ -187,7 +190,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Get list of users
       tags:
       - users
@@ -208,7 +212,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Create a new user
       tags:
       - users
@@ -229,7 +234,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Delete a user by ID
       tags:
       - users
@@ -249,7 +255,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Get a user by ID
       tags:
       - users
@@ -275,7 +282,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/gin.H'
+            additionalProperties: true
+            type: object
       summary: Update a user by ID
       tags:
       - users

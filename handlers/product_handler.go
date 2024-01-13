@@ -17,7 +17,7 @@ import (
 // @Tags product
 // @Accept  json
 // @Produce  json
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /products [get]
 func GetProducts(c *gin.Context) {
 	var products []models.Product
@@ -33,7 +33,7 @@ func GetProducts(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "Product ID"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /products/{id} [get]
 func GetProduct(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -50,7 +50,7 @@ func GetProduct(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param input body models.Product true "Product input"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /products [post]
 func CreateProduct(c *gin.Context) {
 	var productInput models.Product
@@ -70,7 +70,7 @@ func CreateProduct(c *gin.Context) {
 // @Produce  json
 // @Param id path int true "Product ID"
 // @Param input body models.Product true "Product input"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /products/{id} [put]
 func UpdateProduct(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -97,7 +97,7 @@ func UpdateProduct(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "Product ID"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /products/{id} [delete]
 func DeleteProduct(c *gin.Context){
 	id, _ := strconv.Atoi(c.Param("id"))

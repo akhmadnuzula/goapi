@@ -17,7 +17,7 @@ import (
 // @Tags users
 // @Accept  json
 // @Produce  json
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /users [get]
 func GetUsers(c *gin.Context) {
 	var users []models.User
@@ -33,7 +33,7 @@ func GetUsers(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "User ID"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /users/{id} [get]
 func GetUser(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -50,7 +50,7 @@ func GetUser(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param input body models.User true "User input"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /users [post]
 func CreateUser(c *gin.Context) {
 	var userInput models.User
@@ -70,7 +70,7 @@ func CreateUser(c *gin.Context) {
 // @Produce  json
 // @Param id path int true "User ID"
 // @Param input body models.User true "User input"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /users/{id} [put]
 func UpdateUser(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
@@ -98,7 +98,7 @@ func UpdateUser(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "User ID"
-// @Success 200 {object} gin.H
+// @Success 200 {object} map[string]interface{}
 // @Router /users/{id} [delete]
 func DeleteUser(c *gin.Context){
 	id, _ := strconv.Atoi(c.Param("id"))
