@@ -2,18 +2,20 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
-	"log"
 	"goapi/database"
+	"goapi/docs"
 	"goapi/handlers"
 	"goapi/middlewares"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	"log"
+
+	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // "github.com/swaggo/gin-swagger/swaggerFiles"
-	// docs "goapi/docs"
+// docs "goapi/docs"
 
 // @title Your API Title
 // @version 1.0
@@ -28,7 +30,7 @@ func main() {
 	// get env
 	err := godotenv.Load()
 	if err != nil {
-			log.Fatal("Error loading .env file")
+		log.Fatal("Error loading .env file")
 	}
 
 	router := gin.Default()
@@ -36,8 +38,13 @@ func main() {
 	database.InitDB()
 
 	// Tambahkan rute untuk Swagger Docs
-	url := ginSwagger.URL("/swagger/doc.json")
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	docs.SwaggerInfo.Title = "Swagger Example API"
+	docs.SwaggerInfo.Description = "This is a sample server Petstore server."
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = "petstore.swagger.io"
+	docs.SwaggerInfo.BasePath = "/v2"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// auth login
 	router.POST("/login", handlers.Login)
@@ -63,7 +70,7 @@ func main() {
 			productRoute.DELETE("/:id", handlers.DeleteProduct)
 		}
 	}
-	
+
 	// run server
 	port := ":8080"
 	fmt.Printf("Server is running on http://localhost%s\n", port)
