@@ -12,15 +12,14 @@ import (
 )
 
 // Login godoc
-// @Summary Get a login by ID
-// @Description Get a login by ID
+// @Summary Get a login
+// @Description Get a login
 // @Tags login
 // @Accept json
 // @Produce json
-// @Param id path int true "Login ID"
 // @Param loginInfo body models.Login true "Login Information"
 // @Success 200 {object} map[string]interface{}
-// @Router /login/{id} [post]
+// @Router /login [post]
 func Login(c *gin.Context) {
 	var loginInfo models.Login
 	if err := c.BindJSON(&loginInfo); err != nil {

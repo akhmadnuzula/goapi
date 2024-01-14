@@ -22,9 +22,9 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/login/{id}": {
+        "/login": {
             "post": {
-                "description": "Get a login by ID",
+                "description": "Get a login",
                 "consumes": [
                     "application/json"
                 ],
@@ -34,15 +34,8 @@ const docTemplate = `{
                 "tags": [
                     "login"
                 ],
-                "summary": "Get a login by ID",
+                "summary": "Get a login",
                 "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Login ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
                     {
                         "description": "Login Information",
                         "name": "loginInfo",
@@ -74,7 +67,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "product"
+                    "products"
                 ],
                 "summary": "Get list of product",
                 "responses": {
@@ -162,7 +155,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "product"
+                    "products"
                 ],
                 "summary": "Update a product by ID",
                 "parameters": [
@@ -227,6 +220,11 @@ const docTemplate = `{
         },
         "/users": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get list of users",
                 "consumes": [
                     "application/json"

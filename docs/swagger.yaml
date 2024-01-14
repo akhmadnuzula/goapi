@@ -42,42 +42,42 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Your API Title
   version: "1.0"
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
 paths:
-  /login/{id}:
+  /login:
     post:
       consumes:
-      - application/json
-      description: Get a login by ID
+        - application/json
+      description: Get a login
       parameters:
-      - description: Login ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Login Information
-        in: body
-        name: loginInfo
-        required: true
-        schema:
-          $ref: '#/definitions/models.Login'
+        - description: Login Information
+          in: body
+          name: loginInfo
+          required: true
+          schema:
+            $ref: "#/definitions/models.Login"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
             additionalProperties: true
             type: object
-      summary: Get a login by ID
+      summary: Get a login
       tags:
-      - login
+        - login
   /products:
     get:
       consumes:
-      - application/json
+        - application/json
       description: Get list of product
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -86,20 +86,20 @@ paths:
             type: object
       summary: Get list of product
       tags:
-      - product
+        - products
     post:
       consumes:
-      - application/json
+        - application/json
       description: Create a new product
       parameters:
-      - description: Product input
-        in: body
-        name: input
-        required: true
-        schema:
-          $ref: '#/definitions/models.Product'
+        - description: Product input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: "#/definitions/models.Product"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -108,20 +108,20 @@ paths:
             type: object
       summary: Create a new product
       tags:
-      - products
+        - products
   /products/{id}:
     delete:
       consumes:
-      - application/json
+        - application/json
       description: Delete a product by ID
       parameters:
-      - description: Product ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: Product ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -130,19 +130,19 @@ paths:
             type: object
       summary: Delete a product by ID
       tags:
-      - products
+        - products
     get:
       consumes:
-      - application/json
+        - application/json
       description: Get a product by ID
       parameters:
-      - description: Product ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: Product ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -151,25 +151,25 @@ paths:
             type: object
       summary: Get a product by ID
       tags:
-      - products
+        - products
     put:
       consumes:
-      - application/json
+        - application/json
       description: Update a product by ID
       parameters:
-      - description: Product ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Product input
-        in: body
-        name: input
-        required: true
-        schema:
-          $ref: '#/definitions/models.Product'
+        - description: Product ID
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Product input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: "#/definitions/models.Product"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -178,36 +178,38 @@ paths:
             type: object
       summary: Update a product by ID
       tags:
-      - product
+        - products
   /users:
     get:
       consumes:
-      - application/json
+        - application/json
       description: Get list of users
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
             additionalProperties: true
             type: object
+      security:
+        - ApiKeyAuth: []
       summary: Get list of users
       tags:
-      - users
+        - users
     post:
       consumes:
-      - application/json
+        - application/json
       description: Create a new user
       parameters:
-      - description: User input
-        in: body
-        name: input
-        required: true
-        schema:
-          $ref: '#/definitions/models.User'
+        - description: User input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: "#/definitions/models.User"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -216,20 +218,20 @@ paths:
             type: object
       summary: Create a new user
       tags:
-      - users
+        - users
   /users/{id}:
     delete:
       consumes:
-      - application/json
+        - application/json
       description: Delete a user by ID
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -238,19 +240,19 @@ paths:
             type: object
       summary: Delete a user by ID
       tags:
-      - users
+        - users
     get:
       consumes:
-      - application/json
+        - application/json
       description: Get a user by ID
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -259,25 +261,25 @@ paths:
             type: object
       summary: Get a user by ID
       tags:
-      - users
+        - users
     put:
       consumes:
-      - application/json
+        - application/json
       description: Update a user by ID
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: User input
-        in: body
-        name: input
-        required: true
-        schema:
-          $ref: '#/definitions/models.User'
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: User input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: "#/definitions/models.User"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -286,5 +288,5 @@ paths:
             type: object
       summary: Update a user by ID
       tags:
-      - users
+        - users
 swagger: "2.0"

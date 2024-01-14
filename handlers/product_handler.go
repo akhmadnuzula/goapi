@@ -4,19 +4,20 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gin-gonic/gin"
-	"goapi/models"
 	"goapi/database"
+	"goapi/models"
 
+	"github.com/gin-gonic/gin"
 	// "github.com/swaggo/swag/example/celler/httputil"
 )
 
-// get all product
+// get all products
 // @Summary Get list of product
 // @Description Get list of product
-// @Tags product
+// @Tags products
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /products [get]
 func GetProducts(c *gin.Context) {
@@ -33,6 +34,7 @@ func GetProducts(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "Product ID"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /products/{id} [get]
 func GetProduct(c *gin.Context) {
@@ -43,13 +45,14 @@ func GetProduct(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": product})
 }
 
-// create product
+// create products
 // @Summary Create a new product
 // @Description Create a new product
 // @Tags products
 // @Accept  json
 // @Produce  json
 // @Param input body models.Product true "Product input"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /products [post]
 func CreateProduct(c *gin.Context) {
@@ -65,11 +68,12 @@ func CreateProduct(c *gin.Context) {
 // update product by id
 // @Summary Update a product by ID
 // @Description Update a product by ID
-// @Tags product
+// @Tags products
 // @Accept  json
 // @Produce  json
 // @Param id path int true "Product ID"
 // @Param input body models.Product true "Product input"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /products/{id} [put]
 func UpdateProduct(c *gin.Context) {
@@ -97,6 +101,7 @@ func UpdateProduct(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "Product ID"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /products/{id} [delete]
 func DeleteProduct(c *gin.Context){

@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gin-gonic/gin"
-	"goapi/models"
 	"goapi/database"
+	"goapi/models"
 
+	"github.com/gin-gonic/gin"
 	// "github.com/swaggo/swag/example/celler/httputil"
 )
 
@@ -17,6 +17,7 @@ import (
 // @Tags users
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /users [get]
 func GetUsers(c *gin.Context) {
@@ -33,6 +34,7 @@ func GetUsers(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "User ID"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /users/{id} [get]
 func GetUser(c *gin.Context) {
@@ -50,6 +52,7 @@ func GetUser(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param input body models.User true "User input"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /users [post]
 func CreateUser(c *gin.Context) {
@@ -70,6 +73,7 @@ func CreateUser(c *gin.Context) {
 // @Produce  json
 // @Param id path int true "User ID"
 // @Param input body models.User true "User input"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /users/{id} [put]
 func UpdateUser(c *gin.Context) {
@@ -98,6 +102,7 @@ func UpdateUser(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "User ID"
+// @Security ApiKeyAuth
 // @Success 200 {object} map[string]interface{}
 // @Router /users/{id} [delete]
 func DeleteUser(c *gin.Context){
